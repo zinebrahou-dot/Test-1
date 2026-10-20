@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Zineb Rahou — Développeuse Front-End & Graphique</title>
-<meta name="description" content="Portfolio de Zineb Rahou : développement front-end, Shopify, design graphique, peinture, musique et plus de 15 certifications.">
+<meta name="description" content="Portfolio de Zineb Rahou : développement front-end, Shopify, design graphique, peinture, musique, voyages et plus de 15 certifications.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'%3E%3Ccircle cx='26' cy='26' r='26' fill='%2305060f'/%3E%3Cg fill='none' stroke='%23ffb86b' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 18H24L12 34H24'/%3E%3Cpath d='M28 34V18H33A4.5 4.5 0 0 1 33 27H28M33 27L40 34'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=Manrope:wght@300;400;600&display=swap">
@@ -114,6 +114,20 @@ p{color:#c9cdee;margin-bottom:1rem;font-size:1.05rem}
 @keyframes vib{0%{transform:translateY(-4px) scaleY(2)}20%{transform:translateY(3px)}40%{transform:translateY(-2px)}60%{transform:translateY(1px)}100%{transform:none}}
 .chords{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;align-items:center}
 .chords span{font-size:.8rem;color:var(--muted);margin-right:4px}
+
+/* Voyages */
+.travel{position:relative;z-index:1;width:100%;max-width:1200px;margin:0 auto}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.ctry{display:flex;flex-direction:column;align-items:center;gap:6px;padding:18px 10px;border-radius:16px;background:var(--glass);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);color:var(--ink);font:inherit;cursor:pointer;
+  animation:up .6s both;transition:border-color .3s,transform .3s}
+.ctry:hover,.ctry:focus-visible{border-color:var(--accent);transform:translateY(-4px) rotate(-1deg);outline:none}
+.ctry .f{font-size:2.6rem;line-height:1;transition:transform .4s}
+.ctry:hover .f,.ctry:focus-visible .f{transform:scale(1.2) rotate(8deg)}
+.ctry .n{font-size:.95rem}
+.ctry .r{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:center}
+.ctry.pop{animation:pop .5s}
+@keyframes pop{40%{transform:scale(1.14)}}
 
 /* Certifications */
 .certs{width:100%;max-width:1200px;margin:0 auto}
@@ -526,8 +540,22 @@ footer{position:relative;z-index:2;text-align:center;padding:30px 20px 40px;colo
     <div class="mq-row out" data-dir="-1" data-speed="60"><div class="mq-track"><span>Peinture sur toile<i>✦</i></span><span>Art moderne<i>✦</i></span><span>Photographie<i>✦</i></span></div></div>
   </div>
 
+  <!-- NOUVEAU : voyages -->
+  <section id="voyages" data-c="9" data-t="Voyages">
+    <div class="year" aria-hidden="true">Ailleurs</div>
+    <div class="travel">
+      <div class="reveal">
+        <div class="count" aria-label="17 pays visités"><span id="tn">0</span></div>
+        <h2>Voyageuse <em>passionnée</em> 🌍</h2>
+        <p style="max-width:56ch">Dix-sept pays, de l’Amérique du Nord aux fjords du Nord, en passant par Rome et le Vatican. Filtre par région, et touche un drapeau.</p>
+        <div class="filters" id="tfilters" role="group" aria-label="Filtrer les pays par région"></div>
+      </div>
+      <div class="tgrid" id="tgrid" aria-live="polite"></div>
+    </div>
+  </section>
+
   <!-- NOUVEAU : certifications -->
-  <section id="certifs" data-c="9" data-t="Certifications">
+  <section id="certifs" data-c="10" data-t="Certifications">
     <div class="certs">
       <div class="reveal">
         <div class="count" aria-label="Plus de 15 certifications"><span id="n">0</span>+</div>
@@ -539,7 +567,7 @@ footer{position:relative;z-index:2;text-align:center;padding:30px 20px 40px;colo
     </div>
   </section>
 
-  <section id="contact" data-c="10" data-t="Contact">
+  <section id="contact" data-c="11" data-t="Contact">
     <div class="box glass reveal">
       <h2>La suite <em>s’écrit</em> avec toi</h2>
       <p>+212 674 709 958<br>zineb.rahou@gmail.com</p>
@@ -587,7 +615,7 @@ var TOTAL=15; /* nombre affiché dans le compteur */
   var renderer=new THREE.WebGLRenderer({canvas:document.getElementById('gl'),antialias:true,alpha:true});
   renderer.setPixelRatio(Math.min(devicePixelRatio,2));
   var scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(60,1,.1,200);
-  var cols=[0xffb86b,0xff6b6b,0x6bd0ff,0x7dffb0,0xb48bff,0xffd96b,0xc7ff6b,0xff8fd1,0x6bffe0,0xff9b6b,0xffb86b].map(function(c){return new THREE.Color(c)});
+  var cols=[0xffb86b,0xff6b6b,0x6bd0ff,0x7dffb0,0xb48bff,0xffd96b,0xc7ff6b,0xff8fd1,0x6bffe0,0x7ba7ff,0xff9b6b,0xffb86b].map(function(c){return new THREE.Color(c)});
 
   var gen=[
     function(){var u=Math.acos(2*R()-1),t=R()*TAU;return[2.3*Math.sin(u)*Math.cos(t),2.3*Math.sin(u)*Math.sin(t),2.3*Math.cos(u)]},
@@ -602,9 +630,13 @@ var TOTAL=15; /* nombre affiché dans le compteur */
     function(){var t=R()*TAU*3,r=1+R()*2;return[(r+.4*Math.sin(t*2))*Math.cos(t)*1.3,Math.sin(t*3)*.9+(R()-.5)*.3,r*Math.sin(t)*.8]},
     /* 8 musique : ondes sonores */
     function(){var x=(R()-.5)*8,k=Math.floor(R()*5);return[x,Math.sin(x*2+k)*.9*Math.cos(x*.4)+(k-2)*.55,(R()-.5)*.4]},
-    /* 9 certifications : anneaux concentriques */
+    /* 9 voyages : globe en méridiens et parallèles, avec une trajectoire orbitale */
+    function(){if(R()<.82){var u=Math.acos(2*R()-1),t=R()*TAU,q=.349;if(R()<.5)u=Math.round(u/q)*q;else t=Math.round(t/q)*q;
+      return[2.1*Math.sin(u)*Math.cos(t),2.1*Math.cos(u),2.1*Math.sin(u)*Math.sin(t)]}
+      var a=R()*TAU;return[3.1*Math.cos(a),1.18*Math.sin(a),2.86*Math.sin(a)]},
+    /* 10 certifications : anneaux concentriques */
     function(){var k=1+Math.floor(R()*4),a=R()*TAU;return[k*.75*Math.cos(a),(R()-.5)*.2,k*.75*Math.sin(a)]},
-    /* 10 contact : galaxie */
+    /* 11 contact : galaxie */
     function(i){var r=R()*3.2,a=r*1.5+(i%3)*2.094+(R()-.5)*.5;return[r*Math.cos(a),(R()-.5)*.35*(1+(3.2-r)*.3),r*Math.sin(a)]}
   ];
   var targets=gen.map(function(f){var a=new Float32Array(N*3);for(var i=0;i<N;i++)a.set(f(i),i*3);return a});
@@ -667,7 +699,7 @@ var TOTAL=15; /* nombre affiché dans le compteur */
     btn.style.transform='translate('+(e.clientX-b.left-b.width/2)*.25+'px,'+(e.clientY-b.top-b.height/2)*.35+'px)'});
   btn.addEventListener('pointerleave',function(){btn.style.transform=''});
 
-  var sides=[0,2.6,-2.6,2.6,-2.6,0,0,0,0,0,2.6],clock=new THREE.Clock(),still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var sides=[0,2.6,-2.6,2.6,-2.6,0,0,0,0,0,0,2.6],clock=new THREE.Clock(),still=matchMedia('(prefers-reduced-motion: reduce)').matches;
   function loop(){
     var t=still?0:clock.getElapsedTime();
     sp+=(prog-sp)*.06;smx+=(mx-smx)*.05;smy+=(my-smy)*.05;
@@ -944,6 +976,27 @@ var TOTAL=15; /* nombre affiché dans le compteur */
   var n=document.getElementById('n'),done=false;
   new IntersectionObserver(function(es,o){if(es[0].isIntersecting&&!done){done=true;var t0=performance.now();
     (function step(t){var p=Math.min((t-t0)/1400,1);n.textContent=Math.round(TOTAL*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(step)})(t0);o.disconnect()}},{threshold:.4}).observe(n);
+})();
+
+/* ============ VOYAGES ============ */
+(function(){
+  var NA='Amérique du Nord',SU='Europe du Sud',OC='Europe de l’Ouest et centrale',NO='Europe du Nord';
+  var C=[['🇺🇸','États-Unis',NA],['🇨🇦','Canada',NA],['🇪🇸','Espagne',SU],['🇵🇹','Portugal',SU],['🇫🇷','France',OC],['🇧🇪','Belgique',OC],
+    ['🇮🇹','Italie',SU],['🇻🇦','Vatican',SU],['🇦🇹','Autriche',OC],['🇸🇪','Suède',NO],['🇳🇴','Norvège',NO],['🇸🇮','Slovénie',OC],
+    ['🇭🇺','Hongrie',OC],['🇩🇰','Danemark',NO],['🇳🇱','Pays-Bas',OC],['🇩🇪','Allemagne',OC],['🇨🇿','Tchéquie',OC]];
+  var fl=document.getElementById('tfilters'),gd=document.getElementById('tgrid'),active='Tout';
+  ['Tout',NA,SU,OC,NO].forEach(function(k){var b=document.createElement('button');b.type='button';b.className='chip';b.textContent=k;b.setAttribute('aria-pressed',k===active);
+    b.onclick=function(){active=k;[].forEach.call(fl.children,function(x){x.setAttribute('aria-pressed',x===b)});render()};fl.appendChild(b)});
+  function render(){
+    gd.innerHTML=C.filter(function(c){return active==='Tout'||c[2]===active}).map(function(c,i){
+      return '<button type="button" class="ctry" style="animation-delay:'+i*50+'ms"><span class="f" aria-hidden="true">'+c[0]+'</span><span class="n">'+c[1]+'</span><span class="r">'+c[2]+'</span></button>'}).join('');
+  }
+  gd.addEventListener('click',function(e){var b=e.target.closest('.ctry');if(!b)return;
+    b.classList.remove('pop');b.getBoundingClientRect();b.classList.add('pop');if(window.__burst)window.__burst(.6)});
+  render();
+  var n=document.getElementById('tn'),done=false;
+  new IntersectionObserver(function(es,o){if(es[0].isIntersecting&&!done){done=true;var t0=performance.now();
+    (function step(t){var p=Math.min((t-t0)/1400,1);n.textContent=Math.round(C.length*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(step)})(t0);o.disconnect()}},{threshold:.4}).observe(n);
 })();
 </script>
 </body>
